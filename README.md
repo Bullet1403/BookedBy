@@ -69,7 +69,8 @@ pip install flask pandas scikit-learn scipy StandardScaler
 
 ### Project Structure:
 ``` bash
-beauty-dashboard/
+BookedBy/
+├── BookedBy.ipynb
 ├── app.py
 ├── static/
 │   └── dashboard.html
