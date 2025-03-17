@@ -51,13 +51,74 @@ Install dependencies using:
 pip install -r requirements.txt
 ```
 
-### **Running the Project**
+### **Running the Python Notebook**
 
 1. Clone the repository.
 2. Install the required libraries.
-3. Place the `Beauty_Retail_Shop_Transactions_Dataset__2024_.csv` file in the same directory as `BookedBy.ipynb`.
+3. Place the `Beauty_Retail_Shop_Transactions_Dataset__2024_.csv` file in the same directory as `project.ipynb`.
 4. Open the Jupyter Notebook and run the cells.
 
+## **Beauty Retail Dashboard**
+
+## How to Run
+
+### Install Dependencies:
+```bash
+pip install flask pandas scikit-learn scipy StandardScaler
+```
+
+### Project Structure:
+``` bash
+beauty-dashboard/
+├── app.py
+├── static/
+│   └── dashboard.html
+└── Beauty_Retail_Shop_Transactions_Dataset__2024_.csv
+```
+
+### Start the Server:
+```bash
+python app.py
+```
+
+### Access Dashboard:
+Open your browser and navigate to: [http://localhost:5000/dashboard](http://localhost:5000/dashboard)
+
+---
+
+## How It Works
+
+The **Beauty Retail Dashboard** provides insights through a combination of backend analytics and frontend visualizations.
+
+### Backend (Flask)
+- Processes retail transaction data using Pandas
+- Implements K-means clustering to segment customers
+- Provides recommendation algorithms through REST API endpoints
+- Generates random monthly sales data for visualization purposes
+
+### Frontend
+- Responsive dashboard with interactive charts using Chart.js
+- Customer clustering visualization showing spending patterns
+- Monthly sales trends displayed as a line chart
+- Personalized product recommendations based on customer ID
+- Seasonal product recommendations with dropdown selection
+
+---
+
+## Screenshots
+
+![Beauty Retail Dashboard](https://github.com/user-attachments/assets/db137dce-02b2-4026-9696-0177f571a752)
+
+The dashboard displays two main visualizations:
+
+### **Customer Clusters (K-Means)**
+- Shows customer segmentation based on spending habits and purchase frequency
+- Color-coded clusters representing different customer types
+
+### **Monthly Sales Trends**
+- Displays a line chart of sales performance across months
+
+Additional panels allow for interactive product recommendations based on customer ID and seasonal preferences.
 ---
 
 ## **Dataset Description**

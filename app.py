@@ -3,6 +3,8 @@ import pandas as pd
 from collections import defaultdict
 from sklearn.neighbors import NearestNeighbors
 from scipy.sparse import csr_matrix
+from sklearn.preprocessing import StandardScaler
+from sklearn.cluster import KMeans
 
 app = Flask(__name__)
 
@@ -34,6 +36,43 @@ beauty_data['season'] = beauty_data['month'].map(season_mapping)
 @app.route('/test', methods=['GET'])
 def test_endpoint():
     return jsonify({"status": "success", "message": "API is working!"})
+
+# Add to your Flask app (app.py)
+@app.route('/dashboard')
+def dashboard():
+    return app.send_static_file('dashboard.html')
+
+@app.route('/analysis/monthly-sales', methods=['GET'])
+def get_monthly_sales():
+    beauty_data['month'] = pd.to_datetime(beauty_data['purchase_date']).dt.month
+    monthly_data = beauty_data.groupby('month').agg(total_sales=('purchase_amt', 'sum'))
+    # Convert to a format that's easier for JavaScript to process
+    result = {
+        "months": monthly_data.index.tolist(),
+        "sales": monthly_data.total_sales.tolist()
+    }
+    return jsonify(result)
+
+@app.route('/analysis/clusters-visual', methods=['GET'])
+def get_cluster_visualization():
+    customer_summary = beauty_data.groupby('cust_id').agg({
+        'purchase_amt': 'sum',
+        'product_name': 'count'
+    })
+    
+    scaler = StandardScaler()
+    features = scaler.fit_transform(customer_summary)
+    
+    kmeans = KMeans(n_clusters=3, random_state=42, n_init=10)
+    clusters = kmeans.fit_predict(features)
+    
+    return jsonify({
+        "x": features[:,0].tolist(),
+        "y": features[:,1].tolist(),
+        "clusters": clusters.tolist(),
+        "centroids": kmeans.cluster_centers_.tolist()
+    })
+
 
 @app.route('/recommend/knn/<customer_id>', methods=['GET'])
 def knn_recommendations(customer_id):
