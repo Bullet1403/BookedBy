@@ -24,9 +24,11 @@ The project performs the following tasks:
 ## **Project Files**
 
 - `Beauty_Retail_Shop_Transactions_Dataset__2024_.csv` - Dataset containing beauty retail shop transaction data.
-- `project.ipynb` - Jupyter Notebook for data analysis and recommendation system implementation.
+- `BookedBy.ipynb` - Jupyter Notebook for data analysis and recommendation system implementation.
 - `requirements.txt` - List of required Python libraries.
 - `README.md` - This file, providing an overview of the project.
+- `app.py` - Lightweight Flask server.
+- `static` - Contains a dashboard.html file connected to the flask server.
 
 ---
 
